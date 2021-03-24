@@ -8,6 +8,7 @@ package clienttcp;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -32,13 +33,18 @@ public class ClientTcp {
          BufferedInputStream bis = new BufferedInputStream(sock.getInputStream());
          
           //nous créons donc un flux en écriture
-         BufferedOutputStream bos = new BufferedOutputStream(sock.getOutputStream());
+        // BufferedOutputStream bos = new BufferedOutputStream(sock.getOutputStream());
+        PrintWriter writer = null;
+        writer = new PrintWriter(sock.getOutputStream());
           
-         String message = "OK";
+         String message = "c:<15><45455>";
          
-         bos.write(message.getBytes());
+         //bos.write(message.getBytes());
         
-         bos.flush();
+        // bos.flush();
+        
+         writer.println(message);
+         writer.flush();
          //Il ne nous reste plus qu'à le lire
          String content = "";
          int stream;
